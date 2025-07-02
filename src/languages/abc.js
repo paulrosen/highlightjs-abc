@@ -43,13 +43,13 @@ export default function(hljs) {
         scope: "operator",
         match: "="
       },
-      // comments
-      hljs.COMMENT("%", "$"),
       // directives
       {
-        begin: "%%",
-        beginScope: "keyword"
-      }
+        scope: "keyword",
+        match: /^%%\S+/
+      },
+      // comments
+      hljs.COMMENT("%", "$"),
     ]
   };
 }
