@@ -33,6 +33,10 @@ hljs.registerLanguage("abc", hljsAbc);
 hljs.highlightAll();
 ```
 
+## Demo
+
+_[Here is the demo page](https://nocpiun.github.io/highlightjs-abc)_
+
 ## Contribution
 
 Contributions are welcome by pull request.

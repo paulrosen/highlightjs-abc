@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>highlightjs-abc Demo</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding-bottom: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-items: center;
+    }
+    a {
+      color: blue;
+    }
+    pre {
+      background-color: #0e1117;
+      padding: 12px;
+      border-radius: 5px;
+      color: #fff;
+    }
+    pre code {
+      font-family: Consolas;
+      font-size: 10pt;
+    }
+    .links {
+      display: flex;
+      gap: 10px;
+    }
+    #abcjs-container {
+      overflow: visible !important;
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/styles/github-dark.min.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@11.11.1/highlight.min.js"></script>
+  <script src="https://unpkg.com/highlightjs-abc@latest/dist/abc.min.js"></script>
+  <script src="https://unpkg.com/abcjs@6.5.1/dist/abcjs-basic-min.js"></script>
+</head>
+<body>
+  <main>
+    <h1><code>highlightjs-abc</code> Demo</h1>
+    <div class="links">
+      <a href="https://github.com/nocpiun/highlightjs-abc" target="_blank">highlightjs-abc</a>
+      <a href="https://highlightjs.org" target="_blank">highlight.js</a>
+      <a href="https://abcjs.net" target="_blank">abc.js</a>
+      <a href="https://abcnotation.com" target="_blank">Abc Notation</a>
+    </div>
+    <textarea id="input-box" rows="10">
+X: 1
+T: Cooley's
+M: 4/4
+L: 1/8
+R: reel
+K: Emin
+D2|:"Em"EB{c}BA B2 EB|~B2 AB dBAG|"D"FDAD BDAD|FDAD dAFD|
+"Em"EBBA B2 EB|B2 AB defg|"D"afe^c dBAF|1"Em"DEFD E2 D2:|2"Em"DEFD E2 gf||
+|:"Em"eB B2 efge|eB B2 gedB|"D"A2 FA DAFA|A2 FA defg|
+"Em"eB B2 eBgB|eB B2 defg|"D"afe^c dBAF|1"Em"DEFD E2 gf:|2"Em"DEFD E4|]</textarea>
+    <pre><code id="highlight-container"></code></pre>
+    <div id="abcjs-container"></div>
+  </main>
+  <script>
+    const inputBox = document.getElementById("input-box");
+    const hlContainer = document.getElementById("highlight-container");
+    inputBox.addEventListener("change", () => update());
+    inputBox.addEventListener("keyup", () => update());
+    
+    function update() {
+      hlContainer.innerHTML = hljs.highlight(inputBox.value, { language: "abc" }).value;
+      window.ABCJS.renderAbc("abcjs-container", inputBox.value);
+    }
+
+    update();
+  </script>
+</body>
+</html>
