@@ -6,14 +6,33 @@
   Category: common
 */
 export default function(hljs) {
+  const accidentalDirectivePrefix = `(?<=%%(propagate|writeout)-accidentals.*)`;
+  const fontDirectivePrefix = `(?<=%%(title|subtitle|composer|parts|tempo|gchord|annotation|info|text|vocal|words|set)font.*)`;
+  const textDirectivePrefix = `(?<=%%(text|center)\\s)`;
+
   return {
     name: "Abc Notation",
     aliases: ["abc"],
     contains: [
       // fields
       {
-        scope: "keyword",
+        scope: "meta",
         match: /^[XTCOAMLQPZNGHKRBDFSImrsUVWw+]:/
+      },
+      // text content in fields
+      {
+        scope: "meta string",
+        match: /(?<=[COAZHBDFS]:).*/
+      },
+      // title content, lyrics content
+      {
+        scope: "title",
+        match: /(?<=[TWw]:).*/
+      },
+      // duplets, triplets, quadruplets, etc.
+      {
+        scope: "operator",
+        match: /\([2-9]/
       },
       // chord symbols
       hljs.QUOTE_STRING_MODE,
@@ -35,8 +54,8 @@ export default function(hljs) {
       },
       // ties, slurs, grace notes, chords, unisons
       {
-        scope: "punctuation",
-        match: /(-|\(|\)|{|}|\[|\])/
+        scope: "operator",
+        match: /(?<!(\w:|%%).*)(-|\(|\)|{|}|\[|\])/
       },
       // macro expressions
       {
@@ -47,6 +66,21 @@ export default function(hljs) {
       {
         scope: "keyword",
         match: /^%%\S+/
+      },
+      // accidental directives
+      {
+        scope: "keyword",
+        match: new RegExp(accidentalDirectivePrefix +"(not|octave|pitch|none|added|all)")
+      },
+      // font directives
+      {
+        scope: "literal",
+        match: new RegExp(fontDirectivePrefix +"\\*")
+      },
+      // text directives
+      {
+        scope: "string",
+        match: new RegExp(textDirectivePrefix +".*")
       },
       // comments
       hljs.COMMENT("%", "$"),

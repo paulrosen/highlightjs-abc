@@ -1,14 +1,23 @@
 X: 1
 T: 送别
+T: Dreaming of home and mother
 C: John Pond Ordway
 O: USA
 Z: abc-transcription NriotHrreion <nriot233@gmail.com>
 M: 4/4
 K: G
 % This is a comment
+%%papersize A4
+%%newpage
+%%setbarnb 10
+%%writeout-accidentals added
+%%titlefont sans-serif *
+%%subtitlefont sans-serif *
+%%vocalfont sans-serif *
+%%wordsfont sans-serif *
+%%text Hello World
 | "G" !p! G,[DB]([DB]c)-c4 | G,[DB]([DB]c) -cg-g2 |
 |: "G" !mp! G,D BD "C" CE cE | "C" CE cE "G" B,D dG | "G" G,D (GA) "Em" E,E BG | "D" DA d(f e)d "D7" cA |
-%%vocalfont sans-serif *
 w: 长 _ 亭 _ 外 | 古 _ 道 _ 边 | 芳 _ 草 _ 碧 _ 连 | 天
 | "G" [G,B]D GB "C" [Cc]E GE | "C" CE GE "G" B,D dG | "D" DA dA "D7" cA fA | "G" G,D GA BD (G/A/)B |
 w: 晚 _ 风 _ 拂 __ 柳 | 笛 _ 声 _ 残 | 夕 _ 阳 _ 山 _ 外 | 山
