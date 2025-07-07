@@ -46,7 +46,7 @@ export default function(hljs) {
       // repeat symbols, bar symbols
       {
         scope: "operator",
-        match: /[\[\]]?:?\|+:?[\[\]]?(?!")\d*[-\.,]?\d*:?|::/
+        match: /(\|\||::|\[?:*\|(:|\[?[1-9])*\]?)/
       },
       {
         scope: "operator",
