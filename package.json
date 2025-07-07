@@ -1,6 +1,6 @@
 {
   "name": "highlightjs-abc",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Highlight.js grammar for Abc notation language",
   "homepage": "https://github.com/nocpiun/highlightjs-abc#readme",
   "bugs": {
