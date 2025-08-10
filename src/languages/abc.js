@@ -11,7 +11,7 @@ export default function(hljs) {
 
   const inlineHeader = {
     scope: "inline-header",
-    begin: /\[[MLQPRIV]:/,
+    begin: /\[[KMLQPRIV]:/,
     end: /]/,
     contains: [
       {
@@ -24,12 +24,12 @@ export default function(hljs) {
 
   const note = {
     scope: "note",
-    match: /[_^]?[_^=]?[A-Ga-gZz][,']*\d*\/*\d*-?/
+    match: /[_^]?[_^=]?[A-Ga-gZxyz][,']*\d*\/*\d*-?/
   }
 
   const barLine = {
     scope: "bar",
-    match: /(\|\]|\|\||\[\||\|:|:\||::|\|)\d*([,\-]\d)*/,
+    match: /(\|\]|\|\||\[\||\|:|:\||::|\|)\d*([,-]\d)*/,
   }
 
   const tuple = {
@@ -70,7 +70,7 @@ export default function(hljs) {
   }
   const decorationShortcut = {
     scope: "decoration",
-    match: /[\.\~HLMOPSTuv]/
+    match: /[.~HLMOPSTuv]/
   }
   const overlay =	{
     scope: "overlay",
@@ -82,6 +82,10 @@ export default function(hljs) {
   const space = {
     scope: "space",
     match: / /
+  }
+  const tab = {
+    scope: "space",
+    match: /\t/
   }
   const error = {
     scope: "error",
@@ -162,7 +166,7 @@ export default function(hljs) {
       {
         // All other directives just get a simple style
         scope: "directive-body",
-        match: /(?<=%%\S+).*/
+        match: /(?<=%%\S+)[^%\n]*/
       },
       // lyrics content
       {
@@ -194,6 +198,7 @@ export default function(hljs) {
       overlay,
       comment,
       space,
+      tab,
 
       // slur
       {
@@ -212,6 +217,7 @@ export default function(hljs) {
           overlay,
           comment,
           space,
+          tab,
           {
             scope: "error",
             match: /[^)]/

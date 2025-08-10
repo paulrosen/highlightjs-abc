@@ -1,0 +1,143 @@
+/* abcjs-light Theme
+	A theme for syntax highlighting of ABC code
+	for the abcjs-editor.
+
+	This meant to be used with @webcoder49/code-input and
+	highlightjs-abc projects.
+ */
+
+.abcjs-light {
+	/* Header lines */
+
+	.hljs-header {
+		color: #0B34A8;
+	}
+
+	.hljs-header-content {
+		font-style: italic;
+	}
+
+	.hljs-title {
+		font-weight: bold;
+	}
+
+	.hljs-staves {
+		background-color: #ffdfe5;
+	}
+
+	.hljs-staves-content {
+		font-weight: bold;
+	}
+
+	.hljs-key {
+		font-weight: bold;
+	}
+
+	.hljs-part {
+		color: #0B34A8;
+		font-weight: bold;
+	}
+
+	.hljs-tempo {
+		font-weight: bold;
+	}
+
+	.hljs-meter {
+		font-weight: bold;
+	}
+
+	.hljs-voice {
+		background-color: #ffdfe5;
+	}
+
+	.hljs-history {
+		text-decoration: line-through; /* TODO-PER: temp to show unhandled styles */
+	}
+
+	.hljs-notes {
+		text-decoration: line-through; /* TODO-PER: temp to show unhandled styles */
+	}
+
+	.hljs-words {
+		font-weight: bold;
+		color: #9f5555;
+	}
+
+	.hljs-directive {
+		color: #0B34A8;
+	}
+
+	.hljs-directive-body {
+		font-style: italic;
+	}
+
+	.hljs-lyrics {
+		font-weight: bold;
+	}
+
+	.hljs-lyrics-content {
+		color: #9f5555;
+	}
+
+	/* Music lines */
+
+	.hljs-inline-header {
+		background-color: #ffdfe5;
+	}
+
+	/*.hljs-note:nth-child(even) {*/
+	/*	background: #e8e8fa;*/
+	/*}*/
+
+	.hljs-note {
+		/*border-right: 2px solid blue;*/
+		/*border-radius: 6px;*/
+		background: linear-gradient(to right, #a3a3f5 0.5px, transparent 10%);
+	}
+
+	.hljs-chord-symbol {
+		color: #107121;
+	}
+
+	.hljs-decoration {
+		color: #0f7d8c;
+	}
+
+	.hljs-grace {
+		background: #F2F2F2;
+	}
+
+	.hljs-tuple {
+		text-decoration: line-through; /* TODO-PER: temp to show unhandled styles */
+	}
+
+	.hljs-space {
+
+	}
+
+	.hljs-chord {
+		background: #FCF2D0;
+	}
+
+	.hljs-bar {
+		background: #71f6ff;
+	}
+
+	.hljs-overlay {
+		background: #71f6ff;
+	}
+
+	.hljs-error {
+		color: #ffffff;
+		background: red;
+	}
+
+	.hljs-comment {
+		font-style: italic;
+		color: #818181;
+	}
+
+	.hljs-slur {
+		border-bottom: 2px dotted #aaa;
+	}
+}

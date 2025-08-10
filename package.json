@@ -11,7 +11,7 @@
     "url": "git+https://github.com/nocpiun/highlightjs-abc.git"
   },
   "license": "MIT",
-  "author": "NriotHrreion",
+  "author": "NriotHrreion & paulrosen",
   "type": "module",
   "main": "src/languages/abc.js",
   "types": "types/index.d.ts",
