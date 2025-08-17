@@ -51,11 +51,11 @@
 	}
 
 	.hljs-history {
-		text-decoration: line-through; /* TODO-PER: temp to show unhandled styles */
+		font-style: italic;
 	}
 
 	.hljs-notes {
-		text-decoration: line-through; /* TODO-PER: temp to show unhandled styles */
+		font-style: italic;
 	}
 
 	.hljs-words {
@@ -81,34 +81,48 @@
 
 	/* Music lines */
 
+	.hljs-continuation {
+		background: black;
+		color: white;
+		border-radius: 4px;
+	}
 	.hljs-inline-header {
-		background-color: #ffdfe5;
+		background: #ffdfe5;
+		border-radius: 4px;
 	}
 
-	/*.hljs-note:nth-child(even) {*/
-	/*	background: #e8e8fa;*/
-	/*}*/
+	.hljs-note:nth-child(even) {
+		color: #217927;
+	}
 
 	.hljs-note {
 		/*border-right: 2px solid blue;*/
 		/*border-radius: 6px;*/
-		background: linear-gradient(to right, #a3a3f5 0.5px, transparent 10%);
+		/*background: linear-gradient(to right, #a3a3f5 0.5px, transparent 10%);*/
+	}
+
+	.hljs-broken-rhythm {
+		font-weight: bold;
 	}
 
 	.hljs-chord-symbol {
-		color: #107121;
+		color: #dd1d74;
+		text-decoration: underline;
+		text-decoration-color: rgba(221, 29, 116, 0.5);
+		text-decoration-thickness: 0.7px;
 	}
 
 	.hljs-decoration {
-		color: #0f7d8c;
+		color: #767676;
 	}
 
 	.hljs-grace {
 		background: #F2F2F2;
+		border-radius: 4px;
 	}
 
 	.hljs-tuple {
-		text-decoration: line-through; /* TODO-PER: temp to show unhandled styles */
+		font-weight: bold;
 	}
 
 	.hljs-space {
@@ -116,15 +130,18 @@
 	}
 
 	.hljs-chord {
-		background: #FCF2D0;
+		background: linear-gradient(to left, #FCF2D0 90%, transparent 10%);
+		border-radius: 4px;
 	}
 
 	.hljs-bar {
 		background: #71f6ff;
+		border-radius: 4px;
 	}
 
 	.hljs-overlay {
 		background: #71f6ff;
+		border-radius: 4px;
 	}
 
 	.hljs-error {

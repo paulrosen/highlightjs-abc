@@ -92,6 +92,21 @@ export default function(hljs) {
     match: /./
   }
 
+  const continuation = {
+    scope: "continuation",
+    match: /\\$/,
+  }
+
+  const brokenRhythm1 = {
+    scope: "broken-rhythm",
+    match: /(?<=[_^]?[_^=]?[A-Ga-gZxyz][,']*\d*\/*\d*-? *)>>?>?/,
+  }
+
+  const brokenRhythm2 = {
+    scope: "broken-rhythm",
+    match: /(?<=[_^]?[_^=]?[A-Ga-gZxyz][,']*\d*\/*\d*-? *)<<?<?/,
+  }
+
   return {
     name: "Abc Notation",
     aliases: ["abc"],
@@ -186,6 +201,7 @@ export default function(hljs) {
       // Music lines
       //
 
+      continuation,
       inlineHeader,
       note,
       barLine,
@@ -199,12 +215,15 @@ export default function(hljs) {
       comment,
       space,
       tab,
+      brokenRhythm1,
+      brokenRhythm2,
 
       // slur
       {
         scope: "slur",
         begin: /\(/, end: /\)/,
         contains: [
+          continuation,
           inlineHeader,
           note,
           barLine,
@@ -218,6 +237,8 @@ export default function(hljs) {
           comment,
           space,
           tab,
+          brokenRhythm1,
+          brokenRhythm2,
           {
             scope: "error",
             match: /[^)]/
