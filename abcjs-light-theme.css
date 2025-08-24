@@ -79,6 +79,11 @@
 		color: #9f5555;
 	}
 
+	.hljs-text {
+		font-style: italic;
+		color: #818181;
+	}
+
 	/* Music lines */
 
 	.hljs-continuation {
@@ -106,10 +111,23 @@
 	}
 
 	.hljs-chord-symbol {
+		position: relative;
 		color: #dd1d74;
 		text-decoration: underline;
 		text-decoration-color: rgba(221, 29, 116, 0.5);
 		text-decoration-thickness: 0.7px;
+	}
+
+	.hljs-chord-symbol::before {
+		content: '“';
+		position: absolute;
+		background: white;
+	}
+	.hljs-chord-symbol::after {
+		content: '”';
+		position: absolute;
+		right: 0;
+		background: white;
 	}
 
 	.hljs-decoration {
@@ -130,7 +148,7 @@
 	}
 
 	.hljs-chord {
-		background: linear-gradient(to left, #FCF2D0 90%, transparent 10%);
+		background: linear-gradient(to left, transparent 10px, #FCF2D0 calc(100% - 10px), transparent 10px);
 		border-radius: 4px;
 	}
 

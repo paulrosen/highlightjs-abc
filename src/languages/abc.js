@@ -24,12 +24,17 @@ export default function(hljs) {
 
   const note = {
     scope: "note",
-    match: /[_^]?[_^=]?[A-Ga-gZxyz][,']*\d*\/*\d*-?/
+    match: /[_^]?[_^=]?[A-Ga-gXZxyz][,']*\d*\/*\d*-?/
   }
 
   const barLine = {
     scope: "bar",
-    match: /(\|\]|\|\||\[\||\|:|:\||::|\|)\d*([,-]\d)*/,
+    match: /(\[\|]|\|]|\|\||\[\||\|:|:\||::|\|)\d*([,-]\d)*/,
+  }
+
+  const barLine2 = {
+    scope: "bar",
+    match: /(\[)\d+([,-]\d)*/,
   }
 
   const tuple = {
@@ -50,27 +55,33 @@ export default function(hljs) {
 
   const chord = {
     scope: "chord",	// That is: [Ace]
-    begin: /\[/, end: /\]\d*\/*\d*/,
+    begin: /\[(?!\|)/, end: /\]\d*\/*\d*/,
     contains: [
       {
         scope: "note",
         match: /[_^]?[_^=]?[A-Ga-gZz][,']*\d*-?/
+        // TODO-PER: this doesn't catch errors. Try `[absab]` the "s" doesn't get any span
       },
     ],
   }
 
   const chordSymbol = {
     scope: "chord-symbol", // That is: "Am"
-    begin: '"', end: '"'
+    begin: '"', end: '"',
+    contains: [{begin: '\\\\.'}],
   }
 
   const decoration = {
     scope: "decoration",
-    begin: "!", end: "!"
+    match: /![A-Za-z0-9\<\>\+=\/\.\(\)]+!/
+  }
+  const decorationDeprecated = {
+    scope: "decoration",
+    match: /\+[A-Za-z0-9\<\>=\/\.\(\)]+\+/
   }
   const decorationShortcut = {
     scope: "decoration",
-    match: /[.~HLMOPSTuv]/
+    match: /[.~HJLMOPRSTtuv]/
   }
   const overlay =	{
     scope: "overlay",
@@ -94,17 +105,17 @@ export default function(hljs) {
 
   const continuation = {
     scope: "continuation",
-    match: /\\$/,
+    match: /\\\s*$/,
   }
 
   const brokenRhythm1 = {
     scope: "broken-rhythm",
-    match: /(?<=[_^]?[_^=]?[A-Ga-gZxyz][,']*\d*\/*\d*-? *)>>?>?/,
+    match: /(?<=[_^]?[_^=]?[A-Ga-gZxyz\]][,']*\d*\/*\d*-? *)>>?>?/,
   }
 
   const brokenRhythm2 = {
     scope: "broken-rhythm",
-    match: /(?<=[_^]?[_^=]?[A-Ga-gZxyz][,']*\d*\/*\d*-? *)<<?<?/,
+    match: /(?<=[_^]?[_^=]?[A-Ga-gZxyz\]][,']*\d*\/*\d*-? *)<<?<?/,
   }
 
   return {
@@ -121,39 +132,47 @@ export default function(hljs) {
       // content of header lines
       {
         scope: "title",
-        match: /(?<=\nT:)[^%\n]*/
+        match: /(?<=^T:)[^%\n]*/
       },
       {
         scope: "part",
-        match: /(?<=\nP:)[^%\n]*/
+        match: /(?<=^P:)[^%\n]*/
       },
       {
         scope: "tempo",
-        match: /(?<=\nQ:)[^%\n]*/
+        match: /(?<=^Q:)[^%\n]*/
       },
       {
         scope: "key",
-        match: /(?<=\nK:)[^%\n]*/
+        match: /(?<=^K:)[^%\n]*/
       },
       {
         scope: "meter",
-        match: /(?<=\nM:)[^%\n]*/
+        match: /(?<=^M:)[^%\n]*/
       },
       {
         scope: "voice",
-        match: /(?<=\nV:)[^%\n]*/
+        match: /(?<=^V:)[^%\n]*/
       },
       {
         scope: "history",
-        match: /(?<=\nH:)[^%\n]*/
+        match: /(?<=^H:)[^%\n]*/
       },
       {
         scope: "notes",
-        match: /(?<=\nN:)[^%\n]*/
+        match: /(?<=^N:)[^%\n]*/
       },
       {
         scope: "words",
-        match: /(?<=\nW:)[^%\n]*/
+        match: /(?<=^W:)[^%\n]*/
+      },
+      {
+        scope: "new-keyword",
+        match: /(?<=^U:)([^=]+)*/
+      },
+      {
+        scope: "definition",
+        match: /(?<=^U:([^=]+))=[^\n]*/
       },
       // Everything not enumerated above - don't need separate styles for these.
       {
@@ -173,6 +192,12 @@ export default function(hljs) {
             endsWithParent: true
           }
         ]
+      },
+      {
+        // For staves, we want to style the staff information uniquely
+        scope: "text",
+        begin: /^%%begintext/,
+        end: /^%%endtext/,
       },
       {
         scope: "directive",
@@ -200,16 +225,48 @@ export default function(hljs) {
       //
       // Music lines
       //
+      tuple,
 
+      // slur
+      {
+        scope: "slur",
+        begin: /\.?\(/, end: /\)/,
+        contains: [
+          continuation,
+          inlineHeader,
+          note,
+          barLine2,
+          tuple,
+          graceNotes,
+          chord,
+          barLine,
+          chordSymbol,
+          decoration,
+          decorationDeprecated,
+          decorationShortcut,
+          overlay,
+          comment,
+          space,
+          tab,
+          brokenRhythm1,
+          brokenRhythm2,
+          'self',
+          {
+            scope: "error",
+            match: /[^)]/
+          }
+        ]
+      },
       continuation,
       inlineHeader,
       note,
-      barLine,
-      tuple,
+      barLine2,
       graceNotes,
       chord,
+      barLine,
       chordSymbol,
       decoration,
+      decorationDeprecated,
       decorationShortcut,
       overlay,
       comment,
@@ -218,33 +275,6 @@ export default function(hljs) {
       brokenRhythm1,
       brokenRhythm2,
 
-      // slur
-      {
-        scope: "slur",
-        begin: /\(/, end: /\)/,
-        contains: [
-          continuation,
-          inlineHeader,
-          note,
-          barLine,
-          tuple,
-          graceNotes,
-          chord,
-          chordSymbol,
-          decoration,
-          decorationShortcut,
-          overlay,
-          comment,
-          space,
-          tab,
-          brokenRhythm1,
-          brokenRhythm2,
-          {
-            scope: "error",
-            match: /[^)]/
-          }
-        ]
-      },
       error,
     ]
   };
